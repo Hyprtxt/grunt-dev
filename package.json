@@ -1,0 +1,16 @@
+{
+  "name": "GruntTest",
+  "version": "0.0.0",
+  "description": "Trying out grunt ",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-contrib-stylus": "^0.20.0",
+    "grunt-contrib-watch": "^0.6.1"
+  }
+}
