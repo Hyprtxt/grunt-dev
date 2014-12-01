@@ -29,11 +29,14 @@ module.exports = ( grunt ) ->
 				tasks: ['jade']
 				options:
 					livereload: true
+		clean: ['out']
 	})
 	grunt.loadNpmTasks('grunt-contrib-stylus')
 	grunt.loadNpmTasks('grunt-contrib-watch')
 	grunt.loadNpmTasks('grunt-contrib-jade')
+	grunt.loadNpmTasks('grunt-contrib-clean')
 	grunt.registerTask('default', ['watch'])
+	grunt.registerTask('build', ['clean','stylus','jade'])
 
 	# grunt.event.on('watch', ( action, filepath, target ) ->
 	# 	grunt.log.writeln(target + ': ' + filepath + ' has ' + action);
