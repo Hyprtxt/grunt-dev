@@ -1,13 +1,40 @@
-module.exports = ( grunt )->
+module.exports = ( grunt ) ->
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json')
-		stylus: 
+
+		stylus:
 			options:
 				compress: false
 			compile:
-				files: 
+				files:
 					'out/css/style.css': 'src/css/style.styl'
+
+		jade:
+			compile:
+				options:
+					data:
+						debug: true
+					pretty: true
+				files:
+					'out/index.html': ['src/*.jade']
+
+		watch:
+			css:
+				files: ['src/css/*.styl']
+				tasks: ['stylus']
+				options:
+					livereload: true
+			html:
+				files: ['src/index.jade', 'src/jade/*.jade']
+				tasks: ['jade']
+				options:
+					livereload: true
 	})
 	grunt.loadNpmTasks('grunt-contrib-stylus')
-	grunt.registerTask('default', ['stylus'])
-	# grunt.registerTask('build', ['stylus:build'])
+	grunt.loadNpmTasks('grunt-contrib-watch')
+	grunt.loadNpmTasks('grunt-contrib-jade')
+	grunt.registerTask('default', ['watch'])
+
+	# grunt.event.on('watch', ( action, filepath, target ) ->
+	# 	grunt.log.writeln(target + ': ' + filepath + ' has ' + action);
+	# );
