@@ -1,3 +1,9 @@
+jade_data = {
+	title: 'The Site Title'
+	env: process.env.ENV || 'dev'
+	description: 'This is the SEO description'
+}
+
 module.exports = ( grunt ) ->
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json')
@@ -23,8 +29,8 @@ module.exports = ( grunt ) ->
 
 		jade:
 			options:
-				data:
-					debug: true
+				data: jade_data
+					# debug: true
 				pretty: true
 			compile:
 				files:
@@ -49,7 +55,7 @@ module.exports = ( grunt ) ->
 		clean: ['out']
 	})
 
-	env = grunt.option('env') || 'dev'
+	# env = grunt.option('env') || 'dev'
 
 	grunt.loadNpmTasks('grunt-contrib-stylus')
 	grunt.loadNpmTasks('grunt-contrib-watch')

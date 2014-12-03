@@ -1,16 +1,24 @@
 //- header.jade
+- var title_var = 'The Title'
 head
-	title Title
+	title=title_var
 
 	meta(name='viewport', content='width=device-width, initial-scale=1')
-	meta(name='description', content='Site Description')
+	meta(name='description', content=description)
 	meta(charset='utf-8')
 
+if env === dev
 	script(src='//localhost:35729/livereload.js')
 	script(src='../bower_components/jquery/dist/jquery.js')
 	script(src='../bower_components/jquery-cycle2/build/jquery.cycle2.js')
+else
+	script(src='bundle.js')
 
+if env === dev
 	link(rel='stylesheet', href='../bower_components/bootstrap/dist/css/bootstrap.css')
 	link(rel='stylesheet', href='css/futura.css')
 	link(rel='stylesheet', href='css/style.css')
+else
+	link(rel='stylesheet', href='css/style.css')
+
 	link(rel='canonical' href='http://hyprtxt.com')
