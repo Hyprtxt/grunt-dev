@@ -2,12 +2,24 @@ module.exports = ( grunt ) ->
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json')
 
+		copy:
+			css: 
+				expand: true
+				flatten: true
+				src: 'src/css/*.css'
+				dest: 'out/css/'
+			html:
+				expand: true
+				flatten: true
+				src: 'src/*.html'
+				dest: 'out/'
+
 		stylus:
 			options:
 				compress: false
 			compile:
 				files:
-					'out/css/style.css': 'src/css/style.styl'
+					'out/css/style.css': 'src/css/*.styl'
 
 		jade:
 			options:
@@ -20,11 +32,16 @@ module.exports = ( grunt ) ->
 
 		watch:
 			css:
+				files: ['src/css/*.css']
+				tasks: ['copy']
+				options:
+					livereload: true
+			styl:
 				files: ['src/css/*.styl']
 				tasks: ['stylus']
 				options:
 					livereload: true
-			html:
+			jade:
 				files: ['src/index.jade', 'src/jade/*.jade']
 				tasks: ['jade']
 				options:
@@ -38,9 +55,10 @@ module.exports = ( grunt ) ->
 	grunt.loadNpmTasks('grunt-contrib-watch')
 	grunt.loadNpmTasks('grunt-contrib-jade')
 	grunt.loadNpmTasks('grunt-contrib-clean')
+	grunt.loadNpmTasks('grunt-contrib-copy')
 
 	grunt.registerTask('default', ['watch'])
-	grunt.registerTask('build', ['clean', 'stylus', 'jade'])
+	grunt.registerTask('build', ['clean', 'stylus', 'jade', 'copy:css'])
 
 	# grunt.event.on('watch', ( action, filepath, target ) ->
 	# 	grunt.log.writeln(target + ': ' + filepath + ' has ' + action);
