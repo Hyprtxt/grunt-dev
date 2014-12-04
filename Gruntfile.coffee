@@ -1,10 +1,13 @@
-jade_data = {
-	title: 'The Site Title'
-	env: process.env.ENV || 'dev'
-	description: 'This is the SEO description'
-}
+# jade_data = {
+# 	title: 'The Site Title'
+# 	env: 'dev'
+# 	description: 'This is the SEO description'
+# }
 
 module.exports = ( grunt ) ->
+
+	# target = grunt.option('target') || 'dev'
+
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json')
 
@@ -50,11 +53,22 @@ module.exports = ( grunt ) ->
 					'out/css/style.css': 'src/css/*.styl'
 
 		jade:
-			options:
-				data: jade_data
-					# debug: true
-				pretty: true
 			compile:
+				options:
+					data: ()->
+						jade_data = require( './data.json' )
+						jade_data.env = 'dev'
+						jade_data
+					pretty: true
+				files:
+					'out/index.html': ['src/*.jade']
+			production:
+				options:
+					data: ()->
+						jade_data = require( './data.json' )
+						jade_data.env = 'production'
+						jade_data
+					pretty: false
 				files:
 					'out/index.html': ['src/*.jade']
 
@@ -71,13 +85,13 @@ module.exports = ( grunt ) ->
 					livereload: true
 			jade:
 				files: ['src/index.jade', 'src/jade/*.jade']
-				tasks: ['jade']
+				tasks: ['jade:compile']
 				options:
 					livereload: true
-		clean: ['out', 'dest']
+		clean: 
+			out: ['out']
+			dest: ['dest']
 	})
-
-	# env = grunt.option('env') || 'dev'
 
 	grunt.loadNpmTasks('grunt-contrib-stylus')
 	grunt.loadNpmTasks('grunt-contrib-watch')
@@ -89,24 +103,27 @@ module.exports = ( grunt ) ->
 
 	grunt.registerTask('default',
 		[
-			'build',
+			'build'
 			'watch'
 		]
 	)
 	grunt.registerTask('build',
 		[
-			'clean',
-			'stylus',
-			'jade',
+			'clean:out'
+			'stylus'
+			'jade:compile'
 			'copy:css'
 		]
 	)
 	grunt.registerTask('export',
 		[
-			'build',
-			'copy:production',
-			'cssmin:production',
+			'clean:dest'
+			'build'
+			'jade:production'
+			'copy:production'
+			'cssmin:production'
 			'uglify:production'
+			'build'
 		]
 	)
 
