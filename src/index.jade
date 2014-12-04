@@ -3,13 +3,16 @@ doctype html
 html
 	include ./jade/header.jade
 	body
-		.container
+		.container.shadow
 			.row
-				.col-sm-12.shadow
+				.col-sm-12
 					h1=heading
 					hr
+				.col-sm-6
 					p This is a Grunt task managed development environment
 					p With Sauce!!!
-					//- include:markdown ../readme.md
 					h2 Env
 					p=env
+				.col-sm-6
+					include:markdown ../readme.md
+		include ./jade/footer.jade

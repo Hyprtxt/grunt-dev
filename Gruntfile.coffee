@@ -58,6 +58,7 @@ module.exports = ( grunt ) ->
 					data: ()->
 						jade_data = require( './data.json' )
 						jade_data.env = 'dev'
+						jade_data.timestamp = new Date()
 						jade_data
 					pretty: true
 				files:
@@ -67,6 +68,7 @@ module.exports = ( grunt ) ->
 					data: ()->
 						jade_data = require( './data.json' )
 						jade_data.env = 'production'
+						jade_data.timestamp = new Date()
 						jade_data
 					pretty: false
 				files:

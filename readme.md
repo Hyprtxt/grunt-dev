@@ -19,11 +19,16 @@ cd out/
 python -m SimpleHTTPServer
 ```
 
+### Jade Templating
+
+There is a data.json file in the root dir that handles site wide template data.
+
 ### Commands
 
-* `grunt` default task is watch
+* `grunt` default task is watch (LiveReload with Stylus and Jade templates)
 * `grunt stylus` compile stylus
 * `grunt jade` compile jade
-* `grunt clean` clean up the out directory
+* `grunt clean` clean up the out & dest directories
 * `grunt build` clean, jade then stylus
+* `grunt export` builds, concatonates and minifies to `dest/`
 
