@@ -8,6 +8,14 @@ module.exports = ( grunt ) ->
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json')
 
+		uglify: 
+			production: 
+				files: 
+					'dest/js/bundle.js': [
+						'bower_components/jquery/dist/jquery.js'
+						'bower_components/jquery-cycle2/build/jquery.cycle2.js'
+					]
+
 		copy:
 			css: 
 				expand: true
@@ -62,6 +70,7 @@ module.exports = ( grunt ) ->
 	grunt.loadNpmTasks('grunt-contrib-jade')
 	grunt.loadNpmTasks('grunt-contrib-clean')
 	grunt.loadNpmTasks('grunt-contrib-copy')
+	grunt.loadNpmTasks('grunt-contrib-uglify')
 
 	grunt.registerTask('default', ['watch'])
 	grunt.registerTask('build', ['clean', 'stylus', 'jade', 'copy:css'])
