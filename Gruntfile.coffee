@@ -8,12 +8,21 @@ module.exports = ( grunt ) ->
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json')
 
-		uglify: 
-			production: 
-				files: 
+		uglify:
+			production:
+				files:
 					'dest/js/bundle.js': [
 						'bower_components/jquery/dist/jquery.js'
 						'bower_components/jquery-cycle2/build/jquery.cycle2.js'
+					]
+
+		cssmin:
+			production:
+				files:
+					'dest/css/bundle.css': [
+						'bower_components/bootstrap/dist/css/bootstrap.css'
+						'out/css/futura.css'
+						'out/css/style.css'
 					]
 
 		copy:
@@ -22,11 +31,16 @@ module.exports = ( grunt ) ->
 				flatten: true
 				src: 'src/css/*.css'
 				dest: 'out/css/'
-			html:
+			# html:
+			# 	expand: true
+			# 	flatten: true
+			# 	src: 'src/*.html'
+			# 	dest: 'out/'
+			production:
 				expand: true
 				flatten: true
-				src: 'src/*.html'
-				dest: 'out/'
+				src: 'out/*.html'
+				dest: 'dest/'
 
 		stylus:
 			options:
@@ -60,7 +74,7 @@ module.exports = ( grunt ) ->
 				tasks: ['jade']
 				options:
 					livereload: true
-		clean: ['out']
+		clean: ['out', 'dest']
 	})
 
 	# env = grunt.option('env') || 'dev'
@@ -71,9 +85,30 @@ module.exports = ( grunt ) ->
 	grunt.loadNpmTasks('grunt-contrib-clean')
 	grunt.loadNpmTasks('grunt-contrib-copy')
 	grunt.loadNpmTasks('grunt-contrib-uglify')
+	grunt.loadNpmTasks('grunt-contrib-cssmin')
 
-	grunt.registerTask('default', ['watch'])
-	grunt.registerTask('build', ['clean', 'stylus', 'jade', 'copy:css'])
+	grunt.registerTask('default',
+		[
+			'build',
+			'watch'
+		]
+	)
+	grunt.registerTask('build',
+		[
+			'clean',
+			'stylus',
+			'jade',
+			'copy:css'
+		]
+	)
+	grunt.registerTask('export',
+		[
+			'build',
+			'copy:production',
+			'cssmin:production',
+			'uglify:production'
+		]
+	)
 
 	# grunt.event.on('watch', ( action, filepath, target ) ->
 	# 	grunt.log.writeln(target + ': ' + filepath + ' has ' + action);
