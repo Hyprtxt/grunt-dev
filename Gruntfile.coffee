@@ -34,6 +34,11 @@ module.exports = ( grunt ) ->
 				flatten: true
 				src: 'src/css/*.css'
 				dest: 'out/css/'
+			files:
+				expand: true
+				flatten: true
+				src: 'src/files/**'
+				dest: 'out/'
 			# html:
 			# 	expand: true
 			# 	flatten: true
@@ -42,8 +47,9 @@ module.exports = ( grunt ) ->
 			production:
 				expand: true
 				flatten: true
-				src: 'out/*.html'
+				src: ['out/**', '!out/js/**', '!out/css/**']
 				dest: 'dest/'
+
 
 		stylus:
 			options:
@@ -115,6 +121,7 @@ module.exports = ( grunt ) ->
 			'stylus'
 			'jade:compile'
 			'copy:css'
+			'copy:files'
 		]
 	)
 	grunt.registerTask('export',
