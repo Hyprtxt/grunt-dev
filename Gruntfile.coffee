@@ -39,6 +39,11 @@ module.exports = ( grunt ) ->
 				flatten: true
 				src: 'src/files/**'
 				dest: 'out/'
+			js:
+				expand: true
+				flatten: true
+				src: 'src/js/**'
+				dest: 'out/js/'
 			# html:
 			# 	expand: true
 			# 	flatten: true
@@ -91,23 +96,36 @@ module.exports = ( grunt ) ->
 				tasks: ['stylus']
 				options:
 					livereload: true
+			js:
+				files: ['src/js/*.js']
+				tasks: ['jshint', 'copy']
+				options:
+					livereload: true
 			jade:
 				files: ['src/index.jade', 'src/jade/*.jade']
 				tasks: ['jade:compile']
 				options:
 					livereload: true
+
 		clean: 
 			out: ['out']
 			dest: ['dest']
+
+		jshint:
+			all: ['src/js/*.js']
 	})
 
 	grunt.loadNpmTasks('grunt-contrib-stylus')
 	grunt.loadNpmTasks('grunt-contrib-watch')
 	grunt.loadNpmTasks('grunt-contrib-jade')
+
 	grunt.loadNpmTasks('grunt-contrib-clean')
 	grunt.loadNpmTasks('grunt-contrib-copy')
+
 	grunt.loadNpmTasks('grunt-contrib-uglify')
 	grunt.loadNpmTasks('grunt-contrib-cssmin')
+
+	grunt.loadNpmTasks('grunt-contrib-jshint')
 
 	grunt.registerTask('default',
 		[
@@ -121,6 +139,7 @@ module.exports = ( grunt ) ->
 			'stylus'
 			'jade:compile'
 			'copy:css'
+			'copy:js'
 			'copy:files'
 		]
 	)
