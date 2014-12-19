@@ -9,6 +9,7 @@ This is my personal preferred development stack.
 ### Get Started
 
 * Clone the repo `git clone ...`
+* Install Global Dependancies `npm install -g bower grunt-cli`
 * Install Dependancies `npm install`
 * Run Grunt `grunt` or `grunt watch`
 
