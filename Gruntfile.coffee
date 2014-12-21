@@ -24,44 +24,44 @@ module.exports = ( grunt ) ->
 				files:
 					'dest/css/bundle.css': [
 						'bower_components/bootstrap/dist/css/bootstrap.css'
-						'out/css/futura.css'
-						'out/css/style.css'
+						'dev/css/futura.css'
+						'dev/css/style.css'
 					]
 
 		copy:
-			css: 
+			css:
 				expand: true
-				flatten: true
-				src: 'src/css/*.css'
-				dest: 'out/css/'
+				cwd: 'src/css/'
+				src: '*.css'
+				dest: 'dev/css/'
 			files:
 				expand: true
-				flatten: true
-				src: 'src/files/**'
-				dest: 'out/'
+				cwd: 'src/files/'
+				src: '**'
+				dest: 'dev/'
 			js:
 				expand: true
-				flatten: true
-				src: 'src/js/**'
-				dest: 'out/js/'
+				cwd: 'src/js/'
+				src: '**'
+				dest: 'dev/js/'
 			# html:
 			# 	expand: true
 			# 	flatten: true
 			# 	src: 'src/*.html'
-			# 	dest: 'out/'
+			# 	dest: 'dev/'
 			production:
 				expand: true
-				flatten: true
-				src: ['out/**', '!out/js/**', '!out/css/**']
+				flatten: false
+				cwd: 'dev'
+				src: ['**', '!js/**', '!css/**']
 				dest: 'dest/'
-
 
 		stylus:
 			options:
 				compress: false
 			compile:
 				files:
-					'out/css/style.css': 'src/css/*.styl'
+					'dev/css/style.css': 'src/css/*.styl'
 
 		jade:
 			compile:
@@ -73,7 +73,7 @@ module.exports = ( grunt ) ->
 						jade_data
 					pretty: true
 				files:
-					'out/index.html': ['src/*.jade']
+					'dev/index.html': ['src/*.jade']
 			production:
 				options:
 					data: ()->
@@ -83,7 +83,7 @@ module.exports = ( grunt ) ->
 						jade_data
 					pretty: false
 				files:
-					'out/index.html': ['src/*.jade']
+					'dev/index.html': ['src/*.jade']
 
 		watch:
 			css:
@@ -108,8 +108,10 @@ module.exports = ( grunt ) ->
 					livereload: true
 
 		clean: 
-			out: ['out']
+			dev: ['dev']
 			dest: ['dest']
+			post: []
+				# ['dest/files', 'dest/dev']
 
 		jshint:
 			all: ['src/js/*.js']
@@ -135,7 +137,7 @@ module.exports = ( grunt ) ->
 	)
 	grunt.registerTask('build',
 		[
-			'clean:out'
+			'clean:dev'
 			'stylus'
 			'jade:compile'
 			'copy:css'
@@ -152,6 +154,7 @@ module.exports = ( grunt ) ->
 			'cssmin:production'
 			'uglify:production'
 			'build'
+			# 'clean:post'
 		]
 	)
 
