@@ -110,11 +110,16 @@ module.exports = ( grunt ) ->
 		clean: 
 			dev: ['dev']
 			dest: ['dest']
-			post: []
-				# ['dest/files', 'dest/dev']
 
 		jshint:
 			all: ['src/js/*.js']
+
+		open:
+			dev: 
+				path: 'http://localhost'
+			subl:
+				path: '.'
+				app: 'Sublime Text'
 	})
 
 	grunt.loadNpmTasks('grunt-contrib-stylus')
@@ -129,9 +134,12 @@ module.exports = ( grunt ) ->
 
 	grunt.loadNpmTasks('grunt-contrib-jshint')
 
+	grunt.loadNpmTasks('grunt-open')
+
 	grunt.registerTask('default',
 		[
 			'build'
+			'open'
 			'watch'
 		]
 	)
