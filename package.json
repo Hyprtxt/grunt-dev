@@ -4,7 +4,8 @@
   "description": "Trying out grunt",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "grunt"
   },
   "author": "",
   "license": "MIT",
@@ -17,10 +18,8 @@
     "grunt-contrib-stylus": "^0.20.0",
     "grunt-contrib-uglify": "^0.6.0",
     "grunt-contrib-watch": "^0.6.1",
-    "grunt-open": "^0.2.3"
-  },
-  "dependencies": {
     "grunt-contrib-jshint": "^0.10.0",
-    "marked": "^0.3.2"
+    "marked": "^0.3.2",
+    "grunt-open": "^0.2.3"
   }
 }
