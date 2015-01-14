@@ -1,0 +1,1 @@
+$.templates('query', '<ul>{{for #data}}<li>{{:name}} on {{:date}}</li>{{/for}}</ul>');
