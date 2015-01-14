@@ -1,8 +1,5 @@
-<script id="dynamicObjectTemplate" type="text/x-jsrender">
-  <ul>
-    {{for #data}}
-      <li>{{:name}} on {{:date}}</li>
-    {{/for}}
-  </ul>
-  <p>So This is a thing now</p>
-</script>
+<div>
+  <h3>{{>name}}</h3>
+  <p>{{>date}}</p>
+  <pre>{{:_id}}</pre>
+</div>

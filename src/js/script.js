@@ -25,12 +25,30 @@ function lazyGetTemplate ( name ) {
   return deferred.promise();
 }
 
+function showQueryList ( data ) {
+  $.when(
+    lazyGetTemplate('query')
+  )
+    .done( function () {
+      var html = $.templates.query.render( data );
+      $('#queryList').html( html );
+    });
+}
+
+$.ajax({
+    url: 'http://localhost:3000/api/query',
+    data: { 'testing' : 'supersecret' }
+  })
+  .done( function ( data ) {
+    showQueryList( data );
+  });
+
 function showPeople ( people ) {
   $.when(
     lazyGetTemplate("people"),
     lazyGetTemplate("address")
   )
-    .done(function() {
+    .done( function () {
       // Render once all templates for template composition are loaded
       var html = $.templates.people.render(people);
       $("#peopleList").html(html);
