@@ -1,5 +1,5 @@
-console.log( 'script.js' );
-function lazyGetTemplate(name) {
+
+function lazyGetTemplate ( name ) {
   // If the named remote template is not yet loaded and compiled
   // as a named template, fetch it. In either case, return a promise
   // (already resolved, if the template has already been loaded)
@@ -7,9 +7,13 @@ function lazyGetTemplate(name) {
   if ($.templates[name]) {
     deferred.resolve();
   } else {
-    $.getScript(
-      "http://www.jsviews.com/samples/resources/templates/" + name + ".js")
-      .then(function() {
+    $.when(
+      $.get( 'tmpl/' + name + '.tmpl.html' )
+    )
+      .done(function(tmplData) {
+        var daTemplate = {};
+        daTemplate[name] = tmplData;
+        $.templates(daTemplate);
         if ($.templates[name]) {
           deferred.resolve();
         } else {
@@ -21,18 +25,10 @@ function lazyGetTemplate(name) {
   return deferred.promise();
 }
 
-function showPeople(people) {
-  console.log( 'show peeps' );
+function showPeople ( people ) {
   $.when(
-
     lazyGetTemplate("people"),
-// '<div>{{:name}} lives in {{for address tmpl="address" /}}</div>'
-// fetched from www.jsviews.com/samples/resources/templates/people.js
-
     lazyGetTemplate("address")
-// Template: '<b>{{>city}}</b>'
-// fetched from www.jsviews.com/samples/resources/templates/address.js
-
   )
     .done(function() {
       // Render once all templates for template composition are loaded

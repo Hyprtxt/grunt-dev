@@ -16,7 +16,7 @@ module.exports = ( grunt ) ->
 				files:
 					'dest/js/bundle.js': [
 						'bower_components/jquery/dist/jquery.js'
-						'bower_components/jquery-cycle2/build/jquery.cycle2.js'
+						'bower_components/jsviews/jsviews.js'
 					]
 
 		cssmin:
@@ -86,6 +86,11 @@ module.exports = ( grunt ) ->
 					'dev/index.html': ['src/*.jade']
 
 		watch:
+			files:
+				files: ['src/files/**']
+				tasks: ['copy:files']
+				options:
+					livereload: true
 			css:
 				files: ['src/css/*.css']
 				tasks: ['copy']
