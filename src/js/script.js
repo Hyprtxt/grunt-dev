@@ -16,7 +16,6 @@ $.ajax({
   })
   .done( function ( data ) {
     renderSingleTemplate( data, 'dropdown', '#queryOptions' );
-    renderSingleTemplate( data, 'query', '#queryList' );
   })
   .fail( function ( err ) {
     alert( 'AJAX Error: ' + err );
