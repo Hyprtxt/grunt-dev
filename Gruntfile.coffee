@@ -18,6 +18,7 @@ module.exports = ( grunt ) ->
 						'bower_components/jquery/dist/jquery.js'
 						'bower_components/jsviews/jsviews.js'
 						'bower_components/Chart.js/Chart.js'
+						'bower_components/pace/pace.js'
 						'src/js/script.js'
 					]
 
@@ -26,6 +27,7 @@ module.exports = ( grunt ) ->
 				files:
 					'dest/css/bundle.css': [
 						'bower_components/bootstrap/dist/css/bootstrap.css'
+						'bower_components/pace/themes/green/pace-theme-barber-shop.css'
 						'dev/css/futura.css'
 						'dev/css/style.css'
 					]
