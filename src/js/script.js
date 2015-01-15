@@ -1,3 +1,5 @@
+var HOST = 'http://yothrow.com';
+
 // Static AJAX reqest for GAAPI data (THE EXAMPLE)
 $('#pickAQuery').on( 'submit', function ( e ) {
   $('#theJSON').text('Loading...');
@@ -9,18 +11,21 @@ $('#pickAQuery').on( 'submit', function ( e ) {
 
 // Show Query List & Dropdown Stuff
 $.ajax({
-    url: 'http://yothrow.com/api/query',
+    url: HOST + '/api/query',
     data: { 'testing' : 'supersecret' }
   })
   .done( function ( data ) {
     renderSingleTemplate( data, 'dropdown', '#queryOptions' );
     renderSingleTemplate( data, 'query', '#queryList' );
+  })
+  .fail( function ( err ) {
+    alert( 'AJAX Error: ' + err );
   });
 
 
 function returnQueryJSON( id, callback ) {
   $.ajax({
-      url: 'http://yothrow.com/api/result/' + id,
+      url: HOST + '/api/result/' + id,
       data: { 'testing' : 'supersecret' }
     })
     .done( function ( data ) {
