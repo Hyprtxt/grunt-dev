@@ -1,3 +1,9 @@
+$('#pickAQuery').on( 'submit', function ( e ) {
+  // This is the ID of the query
+  console.log( $('#queryOptions').val() );
+  return false;
+});
+
 // Static AJAX reqest for GAAPI data
 
 $.ajax({

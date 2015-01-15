@@ -10,9 +10,20 @@ html
 					hr
 					p This is a boilerplate for single page JavaScript Applications
 					hr
+					h3 Select A Query
+					form#pickAQuery
+						select#queryOptions
+						button Go!
+					br
+					br
+		.container.shadow
+			.row
+				.col-sm-12
 					h3 Get GAAPI Json Example
 					pre#theJSON
-					hr
-					h3 JSViews Example
-					select#queryOptions
+		.container.shadow
+			.row
+				.col-sm-12
+					h3 List of Queries
+					#queryList
 		include ./jade/footer.jade
