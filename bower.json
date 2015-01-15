@@ -19,6 +19,7 @@
     "jquery": "~2.1.1",
     "bootstrap": "~3.3.1",
     "jsviews": "~1.0.0-alpha",
-    "Chart.js": "~1.0.1"
+    "Chart.js": "~1.0.1",
+    "pace": "~1.0.2"
   }
 }
