@@ -33,11 +33,6 @@ module.exports = ( grunt ) ->
 					]
 
 		copy:
-			css:
-				expand: true
-				cwd: 'src/css/'
-				src: '*.css'
-				dest: 'dev/css/'
 			files:
 				expand: true
 				cwd: 'src/files/'
@@ -48,11 +43,6 @@ module.exports = ( grunt ) ->
 				cwd: 'src/js/'
 				src: '**'
 				dest: 'dev/js/'
-			# html:
-			# 	expand: true
-			# 	flatten: true
-			# 	src: 'src/*.html'
-			# 	dest: 'dev/'
 			production:
 				expand: true
 				flatten: false
@@ -103,11 +93,6 @@ module.exports = ( grunt ) ->
 			files:
 				files: ['src/files/**']
 				tasks: ['copy:files']
-				options:
-					livereload: true
-			css:
-				files: ['src/css/*.css']
-				tasks: ['copy']
 				options:
 					livereload: true
 			styl:
@@ -166,7 +151,6 @@ module.exports = ( grunt ) ->
 			'clean:dev'
 			'stylus'
 			'jade:compile'
-			'copy:css'
 			'copy:js'
 			'copy:files'
 		]
