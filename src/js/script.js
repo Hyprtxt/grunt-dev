@@ -39,44 +39,4 @@ $.ajax({
     url: 'http://localhost:3000/api/query',
     data: { 'testing' : 'supersecret' }
   })
-  .done( function ( data ) {
-    showQueryList( data );
-  });
-
-function showPeople ( people ) {
-  $.when(
-    lazyGetTemplate("people"),
-    lazyGetTemplate("address")
-  )
-    .done( function () {
-      // Render once all templates for template composition are loaded
-      var html = $.templates.people.render(people);
-      $("#peopleList").html(html);
-    });
-}
-
-var people1 = [
-    {
-      "name": "Pete", "address": { "city": "Seattle" }
-    },
-    {
-      "name": "Heidi", "address": { "city": "Sidney" }
-    }
-  ],
-
-  people2 = [
-    {
-      "name": "Adriana", "address": { "city": "Dubai" }
-    },
-    {
-      "name": "Robert", "address": { "city": "London" }
-    }
-  ];
-
-$("#show1").on("click", function() {
-  showPeople(people1);
-});
-
-$("#show2").on("click", function() {
-  showPeople(people2);
-});
+  .done( showQueryList );
