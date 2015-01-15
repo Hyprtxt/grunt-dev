@@ -17,6 +17,7 @@ module.exports = ( grunt ) ->
 					'dest/js/bundle.js': [
 						'bower_components/jquery/dist/jquery.js'
 						'bower_components/jsviews/jsviews.js'
+						'src/js/script.js'
 					]
 
 		cssmin:
