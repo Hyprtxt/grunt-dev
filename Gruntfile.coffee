@@ -72,8 +72,13 @@ module.exports = ( grunt ) ->
 						jade_data.timestamp = new Date()
 						jade_data
 					pretty: true
-				files:
-					'dev/index.html': ['src/*.jade']
+				files: [
+						expand: true
+						src: "*.jade"
+						dest: "dev/"
+						cwd: "src/"
+						ext: '.html'
+					]
 			production:
 				options:
 					data: ()->
@@ -82,8 +87,13 @@ module.exports = ( grunt ) ->
 						jade_data.timestamp = new Date()
 						jade_data
 					pretty: false
-				files:
-					'dev/index.html': ['src/*.jade']
+				files: [
+						expand: true
+						src: "*.jade"
+						dest: "dev/"
+						cwd: "src/"
+						ext: '.html'
+					]
 
 		watch:
 			files:
