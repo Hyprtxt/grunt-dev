@@ -1,10 +1,29 @@
 var HOST = 'http://yothrow.com';
+// Get the context of the canvas element we want to select
+var ctx = document.getElementById('daChart').getContext('2d');
 
 // Static AJAX reqest for GAAPI data (THE EXAMPLE)
 $('#pickAQuery').on( 'submit', function ( e ) {
   $('#theJSON').text('Loading...');
   returnQueryJSON(  $('#queryOptions').val(), function( data ) {
+    // Dumps data into a pre tag (#theJSON)
     $('#theJSON').text( JSON.stringify( data, null, '\t' ) );
+
+    var chartData = {};
+    // console.log( data.rows );
+    chartData.labels = [];
+    chartData.datasets = [];
+    chartData.datasets[0] = {
+      label: "My First Dataset",
+      data: []
+    };
+    $.each( data.rows, function ( i, v ) {
+      // console.log( v, i, v[0], v[1] );
+      chartData.labels.push( v[0] );
+      chartData.datasets[0].data.push( v[1] );
+    });
+    console.log( chartData );
+    var barChart = new Chart(ctx).Line(chartData);
   });
   return false;
 });
