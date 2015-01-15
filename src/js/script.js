@@ -1,3 +1,29 @@
+// Static AJAX reqest for GAAPI data
+
+$.ajax({
+    url: 'http://yothrow.com/api/result/54b7f8274f109baf1edfe073',
+    data: { 'testing' : 'supersecret' }
+  })
+  .done( function ( data ) {
+    // console.log( data );
+    $('#theJSON').text( JSON.stringify( data, null, '\t' ) );
+  });
+
+
+function renderSingleTemplate ( data, template, targetElement ) {
+  $.when(
+    lazyGetTemplate( template )
+  )
+    .done( function () {
+      var html = $.templates[template].render( data );
+      console.log ( html );
+      $( targetElement ).html( html );
+    });
+}
+
+
+
+// JS Views Stuff
 
 function lazyGetTemplate ( name ) {
   // If the named remote template is not yet loaded and compiled
@@ -26,6 +52,8 @@ function lazyGetTemplate ( name ) {
 }
 
 function showQueryList ( data ) {
+  renderSingleTemplate( data, 'dropdown', '#queryOptions' );
+
   $.when(
     lazyGetTemplate('query')
   )
