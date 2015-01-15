@@ -4,9 +4,16 @@
 * Stylus/Nib
 * Live Reload
 
-# ToDo
+### Installing Client Side Deps with BOWER
 
-* Per Route JavaScript!
+1. `bower install --save SOMETHING`
+1. Add scripts to `src/jade/footer.jade`
+1. Add stylesheets to `src/jade/header.jade`
+1. Add scripts the uglify task in `Gruntfile.coffee`
+1. Add stylesheets to the cssmin task in `Gruntfile.coffee`
+
+Adding your includes to `header.jade` and `footer.jade` files allows thier use in the `/dev` version of the site. Files are included in the exported `/dest` version of the site when you add them to the Gruntfile tasks.
+
 
 ### Get Started
 
