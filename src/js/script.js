@@ -1,20 +1,32 @@
+// Static AJAX reqest for GAAPI data (THE EXAMPLE)
 $('#pickAQuery').on( 'submit', function ( e ) {
-  // This is the ID of the query
-  console.log( $('#queryOptions').val() );
+  $('#theJSON').text('Loading...');
+  returnQueryJSON(  $('#queryOptions').val(), function( data ) {
+    $('#theJSON').text( JSON.stringify( data, null, '\t' ) );
+  });
   return false;
 });
 
-// Static AJAX reqest for GAAPI data
-
+// Show Query List & Dropdown Stuff
 $.ajax({
-    url: 'http://yothrow.com/api/result/54b7f8274f109baf1edfe073',
+    url: 'http://yothrow.com/api/query',
     data: { 'testing' : 'supersecret' }
   })
   .done( function ( data ) {
-    // console.log( data );
-    $('#theJSON').text( JSON.stringify( data, null, '\t' ) );
+    renderSingleTemplate( data, 'dropdown', '#queryOptions' );
+    renderSingleTemplate( data, 'query', '#queryList' );
   });
 
+
+function returnQueryJSON( id, callback ) {
+  $.ajax({
+      url: 'http://yothrow.com/api/result/' + id,
+      data: { 'testing' : 'supersecret' }
+    })
+    .done( function ( data ) {
+      callback( data );
+    });
+}
 
 function renderSingleTemplate ( data, template, targetElement ) {
   $.when(
@@ -27,10 +39,7 @@ function renderSingleTemplate ( data, template, targetElement ) {
     });
 }
 
-
-
 // JS Views Stuff
-
 function lazyGetTemplate ( name ) {
   // If the named remote template is not yet loaded and compiled
   // as a named template, fetch it. In either case, return a promise
@@ -56,21 +65,3 @@ function lazyGetTemplate ( name ) {
   }
   return deferred.promise();
 }
-
-function showQueryList ( data ) {
-  renderSingleTemplate( data, 'dropdown', '#queryOptions' );
-
-  $.when(
-    lazyGetTemplate('query')
-  )
-    .done( function () {
-      var html = $.templates.query.render( data );
-      $('#queryList').html( html );
-    });
-}
-
-$.ajax({
-    url: 'http://localhost:3000/api/query',
-    data: { 'testing' : 'supersecret' }
-  })
-  .done( showQueryList );
