@@ -18,6 +18,7 @@ module.exports = ( grunt ) ->
 						'bower_components/jquery/dist/jquery.js'
 						'bower_components/jsviews/jsviews.js'
 						'bower_components/Chart.js/Chart.js'
+						'src/js/script.js'
 					]
 
 		cssmin:
