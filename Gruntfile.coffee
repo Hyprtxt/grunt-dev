@@ -83,7 +83,7 @@ module.exports = ( grunt ) ->
 		watch:
 			files:
 				files: ['src_files/**']
-				tasks: ['copy:files']
+				tasks: ['copy:src_files']
 				options:
 					livereload: true
 			styl:
@@ -98,7 +98,12 @@ module.exports = ( grunt ) ->
 					livereload: true
 			jade:
 				files: ['src/*.jade', 'src/jade/*.jade']
-				tasks: ['jade:compile']
+				tasks: ['jade:dev']
+				options:
+					livereload: true
+			config:
+				files: ['config.js']
+				tasks: ['jade:dev']
 				options:
 					livereload: true
 

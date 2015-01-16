@@ -1,5 +1,5 @@
-- var title = 'This page Title is Awesome Index'
-- var description = 'This is a boilerplate for single page JavaScript Applications'
+- var title = 'Reap Chart Maker'
+- var description = 'Visualize Google Analytics Queries'
 doctype html
 html
 	include ./jade/header.jade
@@ -11,13 +11,18 @@ html
 					h1=title
 					p=description
 					hr
+				.col-sm-6
 					h3 Select A Query
-					form#pickAQuery
-						select#queryOptions
-						button Go!
-					br
+					select#queryOptions
+				.col-sm-6
+					h3 Choose a Chart Type
+					select#chartOptions
+						option(value='line') Line
+						option(value='bar') Bar
+						option(value='pie') Pie
+				.col-sm-12
 					h3 Da Chart!
-					canvas#daChart(width='800', height='400')
+					#chartOne.ct-chart
 					h3 Returned Data
 					pre#theJSON
 					br

@@ -1,29 +1,52 @@
 var HOST = 'http://yothrow.com';
-// Get the context of the canvas element we want to select
-var ctx = document.getElementById('daChart').getContext('2d');
-
+var chartOptions = {
+  showPoint: false,
+  lineSmooth: false,
+  showArea: true,
+  height: 500
+};
 // Static AJAX reqest for GAAPI data (THE EXAMPLE)
-$('#pickAQuery').on( 'submit', function ( e ) {
+$('#queryOptions').on( 'change', function ( e ) {
   $('#theJSON').text('Loading...');
-  returnQueryJSON(  $('#queryOptions').val(), function( data ) {
+  returnQueryJSON( $('#queryOptions').val(), function( data ) {
     // Dumps data into a pre tag (#theJSON)
     $('#theJSON').text( JSON.stringify( data, null, '\t' ) );
 
     var chartData = {};
     // console.log( data.rows );
     chartData.labels = [];
-    chartData.datasets = [];
-    chartData.datasets[0] = {
-      label: "My First Dataset",
+    chartData.series = [];
+    
+    chartData.series[0] = {
       data: []
     };
-    $.each( data.rows, function ( i, v ) {
-      // console.log( v, i, v[0], v[1] );
-      chartData.labels.push( v[0] );
-      chartData.datasets[0].data.push( v[1] );
+
+    $.each( data.rows, function ( index, row ) {
+      $.each( row, function ( idx, cell ) {
+        // console.log( index, row, idx, cell );
+        if ( index === 0 ) {
+          if ( idx !== 0 ) {
+            chartData.series[ idx-1 ] = { data: [] };
+          }
+        }
+        if ( idx !== 0 ) {
+          chartData.series[ idx-1 ].data.push( cell );
+        }
+        else {
+          chartData.labels.push( cell );
+        }
+      });
     });
-    console.log( chartData );
-    var barChart = new Chart(ctx).Line(chartData);
+    switch ( $('#chartOptions').val() ) {
+      case 'line':
+        new Chartist.Line('#chartOne', chartData, chartOptions, {});
+        break;
+      case 'bar':
+        new Chartist.Bar('#chartOne', chartData, chartOptions, {});
+        break;
+      default:
+        new Chartist.Pie('#chartOne', chartData, chartOptions, {});
+    }
   });
   return false;
 });
@@ -58,9 +81,7 @@ function renderSingleTemplate ( data, template, targetElement ) {
     lazyGetTemplate( template )
   )
     .done( function () {
-      var html = $.templates[template].render( data );
-      console.log ( html );
-      $( targetElement ).html( html );
+      $( targetElement ).html( $.templates[template].render( data ) );
     });
 }
 
