@@ -17,18 +17,23 @@ Adding your includes to `header.jade` and `footer.jade` files allows thier use i
 
 ### Get Started
 
+#### Webserver
+
+You will also need an HTTP server, I prefer nginx. If you don't already have a local server, SimpleHTTPServer is a good option. You'll need another terminal window.
+
+```bash
+python -m SimpleHTTPServer
+```
+
+You should serve up the whole `reportmaker` directory on your webserver. This means you will develop your site at the url `/reportmaker/dev`
+
+#### Command Line Stuff
+
 * Clone the repo `git clone ...`
 * Install Global Dependancies `npm install -g bower grunt-cli`
 * Install Server Side Dependancies `npm install`
 * Install Client Side Dependancies `bower install`
 * Run Grunt `grunt` or `grunt watch`
-
-You will also need an HTTP server, I prefer nginx. If you don't already have a local server, SimpleHTTPServer is a good option. You'll need another terminal window.
-
-```bash
-cd out/
-python -m SimpleHTTPServer
-```
 
 ### Jade Templating
 

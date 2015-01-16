@@ -36,10 +36,7 @@ $.ajax({
   .done( function ( data ) {
     renderSingleTemplate( data, 'dropdown', '#queryOptions' );
   })
-  .fail( function ( err ) {
-    alert( 'AJAX Error: ' + err );
-  });
-
+  .fail( alertError );
 
 function returnQueryJSON( id, callback ) {
   $.ajax({
@@ -48,7 +45,12 @@ function returnQueryJSON( id, callback ) {
     })
     .done( function ( data ) {
       callback( data );
-    });
+    })
+    .fail( alertError );
+}
+
+function alertError ( err ) {
+  alert( 'AJAX Error: ' + JSON.stringify( err ) );
 }
 
 function renderSingleTemplate ( data, template, targetElement ) {
