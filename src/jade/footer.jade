@@ -4,10 +4,7 @@
 		span=timestamp
 if env === 'dev'
 	script(src='//localhost:35729/livereload.js')
-	script(src='../bower_components/jquery/dist/jquery.js')
-	script(src='../bower_components/jsviews/jsviews.js')
-	script(src='../bower_components/Chart.js/Chart.js')
-	script(src='../bower_components/pace/pace.js')
-	script(src='js/script.js')
+	each script in javascripts
+		script(src='../' + script)
 else
 	script(src='js/bundle.js')

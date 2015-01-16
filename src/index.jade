@@ -1,14 +1,15 @@
-//- index.jade
+- var title = 'This page Title is Awesome Index'
+- var description = 'This is a boilerplate for single page JavaScript Applications'
 doctype html
 html
 	include ./jade/header.jade
 	body
+		include ./jade/nav.jade
 		.container.shadow
 			.row
 				.col-sm-12
-					h1=heading
-					hr
-					p This is a boilerplate for single page JavaScript Applications
+					h1=title
+					p=description
 					hr
 					h3 Select A Query
 					form#pickAQuery

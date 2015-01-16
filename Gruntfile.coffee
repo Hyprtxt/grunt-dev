@@ -1,8 +1,4 @@
-# jade_data = {
-# 	title: 'The Site Title'
-# 	env: 'dev'
-# 	description: 'This is the SEO description'
-# }
+config = require('./config.js');
 
 module.exports = ( grunt ) ->
 
@@ -11,33 +7,30 @@ module.exports = ( grunt ) ->
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json')
 
+		availabletasks:
+			tasks: []
+
 		uglify:
 			production:
 				files:
-					'dest/js/bundle.js': [
-						'bower_components/jquery/dist/jquery.js'
-						'bower_components/jsviews/jsviews.js'
-						'bower_components/Chart.js/Chart.js'
-						'bower_components/pace/pace.js'
-						'src/js/script.js'
-					]
+					'dest/js/bundle.js': config.javascripts
 
 		cssmin:
 			production:
 				files:
-					'dest/css/bundle.css': [
-						'bower_components/bootstrap/dist/css/bootstrap.css'
-						'bower_components/pace/themes/green/pace-theme-barber-shop.css'
-						'dev/css/futura.css'
-						'dev/css/style.css'
-					]
+					'dest/css/bundle.css': config.stylesheets
 
 		copy:
-			files:
+			src_files:
 				expand: true
-				cwd: 'src/files/'
+				cwd: 'src_files/'
 				src: '**'
 				dest: 'dev/'
+			bower:
+				expand: true
+				cwd: 'bower_components'
+				src: '**'
+				dest: 'dev/bower_components'
 			js:
 				expand: true
 				cwd: 'src/js/'
@@ -53,18 +46,17 @@ module.exports = ( grunt ) ->
 		stylus:
 			options:
 				compress: false
-			compile:
+			dev:
 				files:
 					'dev/css/style.css': 'src/css/*.styl'
 
 		jade:
-			compile:
+			dev:
 				options:
 					data: ()->
-						jade_data = require( './data.json' )
-						jade_data.env = 'dev'
-						jade_data.timestamp = new Date()
-						jade_data
+						config.env = 'dev'
+						config.timestamp = new Date()
+						config
 					pretty: true
 				files: [
 						expand: true
@@ -76,10 +68,9 @@ module.exports = ( grunt ) ->
 			production:
 				options:
 					data: ()->
-						jade_data = require( './data.json' )
-						jade_data.env = 'production'
-						jade_data.timestamp = new Date()
-						jade_data
+						config.env = 'production'
+						config.timestamp = new Date()
+						config
 					pretty: false
 				files: [
 						expand: true
@@ -91,7 +82,7 @@ module.exports = ( grunt ) ->
 
 		watch:
 			files:
-				files: ['src/files/**']
+				files: ['src_files/**']
 				tasks: ['copy:files']
 				options:
 					livereload: true
@@ -126,6 +117,8 @@ module.exports = ( grunt ) ->
 				app: 'Sublime Text'
 	})
 
+	grunt.loadNpmTasks('grunt-available-tasks')
+
 	grunt.loadNpmTasks('grunt-contrib-stylus')
 	grunt.loadNpmTasks('grunt-contrib-watch')
 	grunt.loadNpmTasks('grunt-contrib-jade')
@@ -137,6 +130,7 @@ module.exports = ( grunt ) ->
 	grunt.loadNpmTasks('grunt-contrib-cssmin')
 
 	grunt.loadNpmTasks('grunt-contrib-jshint')
+	grunt.loadNpmTasks('grunt-build-docs')
 
 	grunt.loadNpmTasks('grunt-open')
 
@@ -150,9 +144,9 @@ module.exports = ( grunt ) ->
 		[
 			'clean:dev'
 			'stylus'
-			'jade:compile'
+			'jade:dev'
 			'copy:js'
-			'copy:files'
+			'copy:src_files'
 		]
 	)
 	grunt.registerTask('export',
@@ -164,7 +158,6 @@ module.exports = ( grunt ) ->
 			'cssmin:production'
 			'uglify:production'
 			'build'
-			# 'clean:post'
 		]
 	)
 

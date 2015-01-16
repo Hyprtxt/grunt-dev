@@ -7,11 +7,10 @@ head
 	meta(charset='utf-8')
 
 if env === 'dev'
-	link(rel='stylesheet', href='../bower_components/bootstrap/dist/css/bootstrap.css')
-	link(rel='stylesheet', href='../bower_components/pace/themes/green/pace-theme-barber-shop.css')
-	link(rel='stylesheet', href='css/futura.css')
-	link(rel='stylesheet', href='css/style.css')
+	each style in stylesheets
+		link(rel='stylesheet', href='../' + style)
 else
 	link(rel='stylesheet', href='css/bundle.css')
 
-	link(rel='canonical' href='http://hyprtxt.com')
+	//- @todo Figure out canonicals
+	//- link(rel='canonical' href='http://hyprtxt.com/')
