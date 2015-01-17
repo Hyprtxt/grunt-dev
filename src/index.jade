@@ -16,10 +16,9 @@ html
 					select#queryOptions
 				.col-sm-6
 					h3 Choose a Chart Type
-					select#chartOptions
-						option(value='line') Line
-						option(value='bar') Bar
-						option(value='pie') Pie
+					button.makeChartButton#line(value='line') Line
+					button.makeChartButton#bar(value='bar') Bar
+					button.makeChartButton#pie(value='pie') Pie
 				.col-sm-12
 					h3 Da Chart!
 					#chartOne.ct-chart

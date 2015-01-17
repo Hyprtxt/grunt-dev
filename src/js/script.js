@@ -3,53 +3,100 @@ var chartOptions = {
   showPoint: false,
   lineSmooth: false,
   showArea: true,
-  height: 500
+  height: 200
 };
+
+$('.makeChartButton').on( 'click', function ( e ) {
+  // console.log( $( e.currentTarget ).attr('id').toString() );
+  makeAChart( e, false, $( e.currentTarget ).attr('id').toString() );
+});
+
 // Static AJAX reqest for GAAPI data (THE EXAMPLE)
-$('#queryOptions').on( 'change', function ( e ) {
+$('#queryOptions').on( 'change', function ( e ) { 
+  makeAChart( e, true );
+});
+
+function makeAChart( e, buttonChangeFlag, chartType ) {
   $('#theJSON').text('Loading...');
   returnQueryJSON( $('#queryOptions').val(), function( data ) {
     // Dumps data into a pre tag (#theJSON)
     $('#theJSON').text( JSON.stringify( data, null, '\t' ) );
 
     var chartData = {};
-    // console.log( data.rows );
-    chartData.labels = [];
+    // console.log( data.rows.length );
     chartData.series = [];
+    chartData.labels = [];
     
-    chartData.series[0] = {
-      data: []
-    };
-
-    $.each( data.rows, function ( index, row ) {
-      $.each( row, function ( idx, cell ) {
-        // console.log( index, row, idx, cell );
-        if ( index === 0 ) {
-          if ( idx !== 0 ) {
-            chartData.series[ idx-1 ] = { data: [] };
-          }
-        }
-        if ( idx !== 0 ) {
-          chartData.series[ idx-1 ].data.push( cell );
-        }
-        else {
-          chartData.labels.push( cell );
-        }
-      });
-    });
-    switch ( $('#chartOptions').val() ) {
-      case 'line':
-        new Chartist.Line('#chartOne', chartData, chartOptions, {});
-        break;
-      case 'bar':
-        new Chartist.Bar('#chartOne', chartData, chartOptions, {});
-        break;
-      default:
-        new Chartist.Pie('#chartOne', chartData, chartOptions, {});
+    if ( data.rows.length === 1 ) {
+      if ( buttonChangeFlag ) {
+        $('#pie').show();
+        $('#bar').show();
+        $('#line').hide();
+      }
+      // console.log( data.rows[0].map(Number) );
+      console.log( chartType );
+      if ( chartType === undefined || chartType === 'pie' ) {
+        renderChart( 'pie', '#chartOne', {
+          series: data.rows[0].map(Number),
+          labels: data.query.metrics[0]
+        }, chartOptions );
+      }
+      else {
+        // Chart Type 'bar'
+        barLineSetup( chartType, chartData, data, false );  
+      }
     }
+    else {
+      barLineSetup( chartType, chartData, data, true );
+    }
+    console.log( chartData );
   });
   return false;
-});
+}
+
+function barLineSetup ( chartType, chartData, data, buttonChangeFlag ) {
+  chartData.series[0] = {
+    data: []
+  };
+  if ( buttonChangeFlag ) {
+    $('#pie').hide();
+    $('#bar').show();
+    $('#line').show();
+  }
+  $.each( data.rows, function ( index, row ) {
+    $.each( row, function ( idx, cell ) {
+      // console.log( index, row, idx, cell );
+      if ( index === 0 ) {
+        if ( idx !== 0 ) {
+          chartData.series[ idx-1 ] = { data: [] };
+        }
+      }
+      if ( idx !== 0 ) {
+        chartData.series[ idx-1 ].data.push( cell );
+      }
+      else {
+        chartData.labels.push( cell );
+      }
+    });
+  });
+  if ( chartType === undefined ) {
+    chartType = 'line';
+  }
+  renderChart( chartType, '#chartOne', chartData, chartOptions );
+}
+
+function renderChart( type, selector, chartData, chartOptions ) {
+  switch ( type ) {
+    case 'line':
+      new Chartist.Line(selector, chartData, chartOptions, {});
+      break;
+    case 'bar':
+      new Chartist.Bar(selector, chartData, chartOptions, {});
+      break;
+    default:
+      new Chartist.Pie(selector, chartData, chartOptions, {});
+  }
+}
 
 // Show Query List & Dropdown Stuff
 $.ajax({
