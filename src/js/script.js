@@ -1,6 +1,18 @@
 var HOST = 'http://yothrow.com';
 
-$('#queryOptions').on( 'change', function ( e ) { 
+$('#queryOptions').on( 'change', renderTable );
+
+// Show Query List Dropdown, then renderTable
+$.ajax({
+    url: HOST + '/api/query',
+    data: { 'testing' : 'supersecret' }
+  })
+  .done( function ( data ) {
+    renderSingleTemplate( data, 'dropdown', '#queryOptions', renderTable );
+  })
+  .fail( alertError );
+
+function renderTable ( ) { 
   returnQueryJSON( $('#queryOptions').val(), function( data ) {
     $.when(
       lazyGetTemplate('table_head'),
@@ -11,19 +23,9 @@ $('#queryOptions').on( 'change', function ( e ) {
       $( '#table_body' ).html( $.templates.table_body.render( data ) );
     });
   });
-});
+}
 
-// Show Query List & Dropdown Stuff
-$.ajax({
-    url: HOST + '/api/query',
-    data: { 'testing' : 'supersecret' }
-  })
-  .done( function ( data ) {
-    renderSingleTemplate( data, 'dropdown', '#queryOptions' );
-  })
-  .fail( alertError );
-
-function returnQueryJSON( id, callback ) {
+function returnQueryJSON ( id, callback ) {
   $.ajax({
       url: HOST + '/api/result/' + id,
       data: { 'testing' : 'supersecret' }
@@ -38,12 +40,13 @@ function alertError ( err ) {
   alert( 'AJAX Error: ' + JSON.stringify( err ) );
 }
 
-function renderSingleTemplate ( data, template, targetElement ) {
+function renderSingleTemplate ( data, template, targetElement, callback ) {
   $.when(
     lazyGetTemplate( template )
   )
     .done( function () {
       $( targetElement ).html( $.templates[template].render( data ) );
+      callback();
     });
 }
 
