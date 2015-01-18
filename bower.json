@@ -20,6 +20,6 @@
     "bootstrap": "~3.3.1",
     "jsviews": "~1.0.0-alpha",
     "pace": "~1.0.2",
-    "chartist": "~0.5.0"
+    "tablesaw": "~1.0.1"
   }
 }
