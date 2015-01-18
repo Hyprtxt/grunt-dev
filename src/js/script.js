@@ -16,6 +16,18 @@ $('#queryOptions').on( 'change', function ( e ) {
   makeAChart( e, true );
 });
 
+function multiLineChart ( selector, data ) {
+  new Chartist.Line( selector, {
+    labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+    series: [
+      [12, 9, 7, 8, 5],
+      [2, 1, 3.5, 7, 3],
+      [1, 3, 4, 5, 6]
+    ]
+  });
+}
+
+
 function makeAChart( e, buttonChangeFlag, chartType ) {
   $('#theJSON').text('Loading...');
   returnQueryJSON( $('#queryOptions').val(), function( data ) {
@@ -38,7 +50,7 @@ function makeAChart( e, buttonChangeFlag, chartType ) {
       if ( chartType === undefined || chartType === 'pie' ) {
         renderChart( 'pie', '#chartOne', {
           series: data.rows[0].map(Number),
-          labels: data.query.metrics[0]
+          labels: data.query.metrics
         }, chartOptions );
       }
       else {
