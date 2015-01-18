@@ -1,4 +1,4 @@
-- var title = 'Reap Chart Maker'
+- var title = 'Reap Table Maker'
 - var description = 'Visualize Google Analytics Queries'
 doctype html
 html
@@ -14,15 +14,42 @@ html
 				.col-sm-6
 					h3 Select A Query
 					select#queryOptions
-				.col-sm-6
-					h3 Choose a Chart Type
-					button.makeChartButton#line(value='line') Line
-					button.makeChartButton#bar(value='bar') Bar
-					button.makeChartButton#pie(value='pie') Pie
 				.col-sm-12
-					h3 Da Chart!
-					#chartOne.ct-chart
+					h3 Tables!
+
+				.col-sm-12
+					table.tablesaw.tablesaw-stack(data-tablesaw-mode="stack")
+						thead#table_head
+						tbody#table_body
+
+				.col-sm-12
 					h3 Returned Data
 					pre#theJSON
 					br
+
+				//- .col-sm-12
+				//- 	table#table-9438.tablesaw.tablesaw-stack(data-tablesaw-mode='stack')
+				//- 		thead
+				//- 			tr
+				//- 				th(scope='col', data-tablesaw-sortable-col='', data-tablesaw-priority='persist') Movie Title
+				//- 				th(scope='col', data-tablesaw-sortable-col='', data-tablesaw-sortable-default-col='', data-tablesaw-priority='3') Rank
+				//- 				th(scope='col', data-tablesaw-sortable-col='', data-tablesaw-priority='2') Year
+				//- 				th(scope='col', data-tablesaw-sortable-col='', data-tablesaw-priority='1')
+				//- 					abbr(title='Rotten Tomato Rating') Rating
+				//- 				th(scope='col', data-tablesaw-sortable-col='', data-tablesaw-priority='4') Gross
+				//- 		tbody
+				//- 			tr
+				//- 				td.title
+				//- 					span.tablesaw-cell-content
+				//- 						a(href='http://en.wikipedia.org/wiki/Avatar_(2009_film)') Avatar
+				//- 				td
+				//- 					span.tablesaw-cell-content 1
+				//- 				td
+				//- 					span.tablesaw-cell-content 2009
+				//- 				td
+				//- 					span.tablesaw-cell-content 83%
+				//- 				td
+				//- 					span.tablesaw-cell-content $2.7B
+
+
 		include ./jade/footer.jade
