@@ -1,6 +1,6 @@
 var HOST = 'http://yothrow.com';
 
-$('#queryOptions').on( 'change', renderTable );
+$('#queryOptions').on( 'change', makeTable );
 
 // Show Query List Dropdown, then renderTable
 $.ajax({
@@ -8,20 +8,22 @@ $.ajax({
     data: { 'testing' : 'supersecret' }
   })
   .done( function ( data ) {
-    renderSingleTemplate( data, 'dropdown', '#queryOptions', renderTable );
+    renderSingleTemplate( data, 'dropdown', '#queryOptions', makeTable );
   })
   .fail( alertError );
 
-function renderTable ( ) { 
-  returnQueryJSON( $('#queryOptions').val(), function( data ) {
-    $.when(
-      lazyGetTemplate('table_head'),
-      lazyGetTemplate('table_body')
-    )
-    .done( function () {
-      $( '#table_head' ).html( $.templates.table_head.render( data ) );
-      $( '#table_body' ).html( $.templates.table_body.render( data ) );
-    });
+function makeTable ( ) { 
+  returnQueryJSON( $('#queryOptions').val(), renderTable );
+}
+
+function renderTable ( data ) {
+  $.when(
+    lazyGetTemplate('table_head'),
+    lazyGetTemplate('table_body'),
+    lazyGetTemplate('table')
+  )
+  .done( function () {
+    $( '#tableHolder' ).html( $.templates.table.render( data ) );
   });
 }
 
