@@ -1,5 +1,18 @@
 var HOST = 'http://yothrow.com';
 
+$('#queryOptions').on( 'change', function ( e ) { 
+  returnQueryJSON( $('#queryOptions').val(), function( data ) {
+    $.when(
+      lazyGetTemplate('table_head'),
+      lazyGetTemplate('table_body')
+    )
+    .done( function () {
+      $( '#table_head' ).html( $.templates.table_head.render( data ) );
+      $( '#table_body' ).html( $.templates.table_body.render( data ) );
+    });
+  });
+});
+
 // Show Query List & Dropdown Stuff
 $.ajax({
     url: HOST + '/api/query',
