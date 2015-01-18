@@ -42,14 +42,15 @@ function makeAChart( e, buttonChangeFlag, chartType ) {
         }, chartOptions );
       }
       else {
-        // Chart Type 'bar'
+        // Chart Type Bar
         barLineSetup( chartType, chartData, data, false );  
       }
+      
     }
     else {
       barLineSetup( chartType, chartData, data, true );
     }
-    console.log( chartData );
+    //console.log( chartData );
   });
   return false;
 }
