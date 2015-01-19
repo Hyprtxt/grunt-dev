@@ -8,22 +8,45 @@ $.ajax({
     data: { 'testing' : 'supersecret' }
   })
   .done( function ( data ) {
-    renderSingleTemplate( data, 'dropdown', '#queryOptions', makeTable );
+    renderTemplate ( '#queryOptions', data, 'dropdown', [], makeTable );
   })
   .fail( alertError );
 
 function makeTable ( ) { 
-  returnQueryJSON( $('#queryOptions').val(), renderTable );
+  returnQueryJSON ( $('#queryOptions').val(), function ( data ) {
+    renderTemplate ( '#tableHolder', data, 'table', [ 'table_head', 'table_body' ] );
+  });//renderTable );
 }
 
-function renderTable ( data ) {
+function renderTemplate ( targetElement, data, template, deps, callback ) {
+  if ( deps !== undefined ) {
+    $.when(
+      $.each( deps, function ( i, v ) {
+        lazyGetTemplate( v );
+      }),
+      lazyGetTemplate( template )
+    )
+    .done( function () {
+      $( targetElement ).html( $.templates[template].render( data ) );
+      if ( callback !== undefined ) {
+        callback();
+      }
+    });
+  }
+  else {
+    renderSingleTemplate( targetElement, data, template, callback );
+  }
+}
+
+function renderSingleTemplate ( targetElement, data, template, callback ) {
   $.when(
-    lazyGetTemplate('table_head'),
-    lazyGetTemplate('table_body'),
-    lazyGetTemplate('table')
+    lazyGetTemplate( template )
   )
   .done( function () {
-    $( '#tableHolder' ).html( $.templates.table.render( data ) );
+    $( targetElement ).html( $.templates[template].render( data ) );
+    if ( callback !== undefined ) {
+      callback();
+    }
   });
 }
 
@@ -42,15 +65,7 @@ function alertError ( err ) {
   alert( 'AJAX Error: ' + JSON.stringify( err ) );
 }
 
-function renderSingleTemplate ( data, template, targetElement, callback ) {
-  $.when(
-    lazyGetTemplate( template )
-  )
-    .done( function () {
-      $( targetElement ).html( $.templates[template].render( data ) );
-      callback();
-    });
-}
+
 
 // JS Views Stuff
 function lazyGetTemplate ( name ) {
