@@ -7,6 +7,7 @@ module.exports = {
 		, 'bower_components/jsviews/jsviews.js'
 		, 'bower_components/tablesaw/dist/tablesaw.js'
 		, 'bower_components/pace/pace.js'
+		, 'dev/js/tmpl.js'
 		, 'dev/js/script.js'
 	]
 	, stylesheets: [
