@@ -18,28 +18,29 @@ function makeTable ( ) {
   });//renderTable );
 }
 
-function renderTemplate ( targetElement, data, template, deps, callback ) {
-  if ( deps !== undefined ) {
-    $.when(
-      $.each( deps, function ( i, v ) {
-        lazyGetTemplate( v );
-      }),
-      lazyGetTemplate( template )
-    )
-    .done( function () {
-      $( targetElement ).html( $.templates[template].render( data ) );
-      if ( callback !== undefined ) {
-        callback();
-      }
-    });
-  }
-  else {
-    renderSingleTemplate( targetElement, data, template, callback );
-  }
+function returnQueryJSON ( id, callback ) {
+  $.ajax({
+    url: HOST + '/api/result/' + id,
+    data: { 'testing' : 'supersecret' }
+  })
+  .done( function ( data ) {
+    callback( data );
+  })
+  .fail( alertError );
 }
 
-function renderSingleTemplate ( targetElement, data, template, callback ) {
+function alertError ( err ) {
+  alert( 'AJAX Error: ' + JSON.stringify( err ) );
+}
+
+// JS Views Stuff
+function renderTemplate ( targetElement, data, template, deps, callback ) {
+  // Renders Templates with includes, define an array of template
+  // names to load them up before adding them to the page
   $.when(
+    $.each( deps, function ( i, v ) {
+      lazyGetTemplate( v );
+    }),
     lazyGetTemplate( template )
   )
   .done( function () {
@@ -50,24 +51,6 @@ function renderSingleTemplate ( targetElement, data, template, callback ) {
   });
 }
 
-function returnQueryJSON ( id, callback ) {
-  $.ajax({
-      url: HOST + '/api/result/' + id,
-      data: { 'testing' : 'supersecret' }
-    })
-    .done( function ( data ) {
-      callback( data );
-    })
-    .fail( alertError );
-}
-
-function alertError ( err ) {
-  alert( 'AJAX Error: ' + JSON.stringify( err ) );
-}
-
-
-
-// JS Views Stuff
 function lazyGetTemplate ( name ) {
   // If the named remote template is not yet loaded and compiled
   // as a named template, fetch it. In either case, return a promise
@@ -79,17 +62,17 @@ function lazyGetTemplate ( name ) {
     $.when(
       $.get( 'tmpl/' + name + '.tmpl.html' )
     )
-      .done(function(tmplData) {
-        var daTemplate = {};
-        daTemplate[name] = tmplData;
-        $.templates(daTemplate);
-        if ($.templates[name]) {
-          deferred.resolve();
-        } else {
-          alert("Script: \"" + name + ".js\" failed to load");
-          deferred.reject();
-        }
-      });
+    .done(function(tmplData) {
+      var daTemplate = {};
+      daTemplate[name] = tmplData;
+      $.templates(daTemplate);
+      if ($.templates[name]) {
+        deferred.resolve();
+      } else {
+        alert("Script: \"" + name + ".js\" failed to load");
+        deferred.reject();
+      }
+    });
   }
   return deferred.promise();
 }
