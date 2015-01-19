@@ -4,13 +4,13 @@ $('#queryOptions').on( 'change', makeTable );
 
 // Show Query List Dropdown, then renderTable
 $.ajax({
-    url: HOST + '/api/query',
-    data: { 'testing' : 'supersecret' }
-  })
-  .done( function ( data ) {
-    renderTemplate ( '#queryOptions', data, 'dropdown', [], makeTable );
-  })
-  .fail( alertError );
+  url: HOST + '/api/query',
+  data: { 'testing' : 'supersecret' }
+})
+.done( function ( data ) {
+  renderTemplate ( '#queryOptions', data, 'dropdown', [], makeTable );
+})
+.fail( alertError );
 
 function makeTable ( ) { 
   returnQueryJSON ( $('#queryOptions').val(), function ( data ) {
