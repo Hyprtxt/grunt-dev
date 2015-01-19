@@ -1,5 +1,9 @@
 <tr>
 {{for columnHeaders}}
-  <th scope="col" data-tablesaw-sortable-col="">{{:name}}</th>
+  {{if #index == 0 }}
+  <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="persist">{{:name}}</th>
+  {{else}}
+  <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="{{:#index}}">{{:name}}</th>
+  {{/if}}
 {{/for}}
 </tr>

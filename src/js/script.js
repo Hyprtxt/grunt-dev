@@ -18,7 +18,9 @@ function makeTable () {
     url: HOST + '/api/result/' + $('#queryOptions').val()
   })
   .done( function ( data ) {
-    tmpl.renderTemplate ( '#tableHolder', data, 'table', [ 'table_head', 'table_body' ] );
+    tmpl.renderTemplate ( '#tableHolder', data, 'table', [ 'table_head', 'table_body' ], function () {
+      $('.tablesaw').table().data( "table" ).refresh();
+    });
   })
   .fail( alertError );
 }
