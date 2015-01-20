@@ -35,7 +35,7 @@ var tmpl = {
         if ($.templates[name]) {
           deferred.resolve();
         } else {
-          alert("Script: \"" + name + ".js\" failed to load");
+          alert("Template: \"" + name + ".tmpl.html\" failed to load");
           deferred.reject();
         }
       });
