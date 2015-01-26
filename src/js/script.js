@@ -10,20 +10,21 @@ var chartOptions = {
 var responsiveChartOptions = {};
 
 var block = {
-  query_id: '',
+  query: '',
   chart: true,
   chart_type: 'pie',
   table: true,
   insight: ''
 };
 
-$.ajaxSetup({ data: { 'testing' : 'supersecret' } });
+// $.ajaxSetup({ data: { 'testing' : 'supersecret' } });
 
 // $('#queryOptions').on( 'change', makeTable );
 
 // Show Query List Dropdown, then renderTable
 $.ajax({
-  url: HOST + '/api/query'
+  url: HOST + '/api/query',
+  data: { 'testing' : 'supersecret' }
 })
 .done( function ( data ) {
   tmpl.renderTemplate( '#queryOptions', data, 'dropdown', [], function () {
@@ -49,10 +50,12 @@ $('body').on( 'change', '#queryOptions', function ( e ) {
 
   returnQueryJSON( $('#queryOptions').val(), function ( data ) {
 
-    block.query_id = $('#queryOptions').val();
-    console.log( block );
+    block.query = $('#queryOptions').val();
+    block.insight = $('#insight').val();
+    // console.log( block );
 
     if ( block.chart ) {
+      $('#theChart, #chartButtons').show();
       if ( data.rows.length === 1 ) {
         tmpl.renderTemplate( '#chartButtons', { pie: true, bar: true, line: false }, 'chart_buttons' );
         renderChart( '#theChart', data, 'pie' );
@@ -62,11 +65,18 @@ $('body').on( 'change', '#queryOptions', function ( e ) {
         renderChart( '#theChart', data, 'line' );
       }
     }
+    else {
+      $('#theChart, #chartButtons').hide();
+    }
 
     if ( block.table ) {
+      $('#tableHolder').show();
       tmpl.renderTemplate ( '#tableHolder', data, 'table', [ 'table_head', 'table_body' ], function () {
         $('.tablesaw').table().data( "table" ).refresh();
       });
+    }
+    else {
+      $('#tableHolder').hide();
     }
 
   });
@@ -74,20 +84,27 @@ $('body').on( 'change', '#queryOptions', function ( e ) {
 });
 
 $('body').on( 'click', '.makeChartButton', function ( e ) {
+  block.chart_type = $( e.currentTarget ).val();
+  $('#chart_type').val( block.chart_type );
   returnQueryJSON( $('#queryOptions').val(), function ( data ) {
-    renderChart( '#theChart', data, $( e.currentTarget ).val() );
+    renderChart( '#theChart', data, block.chart_type );
   });
   return false;
 });
 
-// function makeTable () {
-//   $.ajax({
-//     url: HOST + '/api/result/' + $('#queryOptions').val()
-//   })
-//   .done( function ( data ) {
-//   })
-//   .fail( alertError );
-// }
+$('#save').on('click', sendToAPI );
+
+function sendToAPI ( ) {
+  $.ajax({
+    data: block,
+    url: 'http://api.yothrow.com/block/create',
+    success: function ( data ) {
+      alert( JSON.stringify( data ) );
+    },
+    dataType: 'json'
+  });
+  return false;
+}
 
 function alertError ( err ) {
   if ( err !== undefined )
@@ -103,7 +120,8 @@ function renderChart ( selector, data, chartType ) {
 
 function returnQueryJSON ( id, callback ) {
   $.ajax({
-    url: HOST + '/api/result/' + id
+    url: HOST + '/api/result/' + id,
+    data: { 'testing' : 'supersecret' }
   })
   .done( callback )
   .fail( alertError );

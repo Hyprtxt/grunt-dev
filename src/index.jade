@@ -1,5 +1,6 @@
-- var title = 'Reap Table Maker'
-- var description = 'Visualize Google Analytics Queries'
+//- NOTE: These are optional overrides
+//- - var title = 'Reap Table Maker'
+//- - var description = 'Visualize Google Analytics Queries'
 doctype html
 html
 	include ./jade/header.jade
@@ -14,11 +15,17 @@ html
 						hr
 					.col-sm-6
 						h3 Select A Query
-						select#queryOptions
+						select#queryOptions(name='query')
 					.col-sm-6
+						input#chart_type(type='hidden', value='', name='chart_type')
+						.form-group
+							label Block Name
+							input.form-control(type='text', name='name')
 						#chartButtons
 						br
-						textarea.form-control(name='insight') This is a bit of text that will show up with the block
+						.form-group
+							label Insight Text
+							textarea.form-control#insight(name='insight') This is a bit of text that will show up with the block
 						.checkbox
 							label
 								input#chart(type='checkbox', checked, name='chart')
@@ -33,7 +40,7 @@ html
 					.col-sm-12#tableHolder
 					.col-sm-12
 						br
-						button.btn.btn-default Save This Block
+						button.btn.btn-default#save Save This Block
 				//- .col-sm-12
 					h3 Returned Data
 					pre#theJSON
