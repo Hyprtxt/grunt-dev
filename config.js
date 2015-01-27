@@ -9,7 +9,9 @@ module.exports = {
 	, stylesheets: [
 		'bower_components/bootstrap/dist/css/bootstrap.css'
 		, 'bower_components/fontawesome/css/font-awesome.css'
-		, '//fonts.googleapis.com/css?family=Cinzel:400,700'
 		, 'dev/css/style.css'
+	]
+	, fonts: [
+		'//fonts.googleapis.com/css?family=Cinzel:400,700'
 	]
 };
