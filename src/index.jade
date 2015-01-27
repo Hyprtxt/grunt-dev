@@ -6,43 +6,54 @@ html
 	include ./jade/header.jade
 	body
 		include ./jade/nav.jade
-		.container.shadow
+		.hero
+			h2 Love is in the Air
+			p Lipsum Dolor Sit Amet
+		.container
+			.col-sm-12
+				h2=heading
+
 			.row
-				form(method='GET', action='http://api.yothrow.com/report/create')
-					.col-sm-12
-						h1=title
-						p=description
-						hr
-					.col-sm-6
-						h3 Select A Query
-						select#queryOptions(name='query')
-					.col-sm-6
-						input#chart_type(type='hidden', value='', name='chart_type')
-						.form-group
-							label Block Name
-							input.form-control(type='text', name='name')
-						#chartButtons
-						br
-						.form-group
-							label Insight Text
-							textarea.form-control#insight(name='insight') This is a bit of text that will show up with the block
-						.checkbox
-							label
-								input#chart(type='checkbox', checked, name='chart')
-								| Include a Chart
-						.checkbox
-							label
-								input#table(type='checkbox', checked, name='table')
-								| Include a Table
-					.col-sm-12
-						h3 Your Block/Insight
-					.col-sm-12#theChart
-					.col-sm-12#tableHolder
-					.col-sm-12
-						br
-						button.btn.btn-default#save Save This Block
-				//- .col-sm-12
-					h3 Returned Data
-					pre#theJSON
-					br
+				.col-sm-7
+					h3 Hand Bordered Square
+					p Lipsum Dolor Sit Amet
+					button Customize
+				.col-sm-5
+					img(src='http://placekitten.com/g/300/300')
+			.row
+				.col-sm-5
+					img(src='http://placekitten.com/g/300/300')
+				.col-sm-7
+					h3 Colby Wedding Invitation
+					p Lipsum Dolor Sit Amet
+					button Customize
+
+			br
+			br
+			hr
+
+			.heading
+				h2 Coture Wedding Invitations
+				p Some weddings call for an introduction a bit more luxurious. For those kinds of weddings, we offer Couture wedding invitations that introduce your wedding with only the highest form of taste and social grace.
+
+			.row
+				.col-sm-7
+					h3 Freeman + Carlisle
+					p Lipsum Dolor Sit Amet
+					button View Invitation
+				.col-sm-5
+					img(src='http://placekitten.com/g/300/300')
+
+			.row
+				.col-sm-5
+					img(src='http://placekitten.com/g/300/300')
+				.col-sm-7
+					h3 Callahan + Shaw
+					p Lipsum Dolor Sit Amet
+					button View Invitation
+
+			.hero
+				h2 Our Mission Is to create the proper introduction for your memeorable affair
+				button Get Started Today
+
 		include ./jade/footer.jade
