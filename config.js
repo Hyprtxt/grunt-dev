@@ -8,6 +8,7 @@ module.exports = {
 	]
 	, stylesheets: [
 		'bower_components/bootstrap/dist/css/bootstrap.css'
+		, 'bower_components/fontawesome/css/font-awesome.css'
 		, 'dev/css/style.css'
 	]
 };
