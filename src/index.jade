@@ -6,19 +6,22 @@ html
 	include ./jade/header.jade
 	body
 		include ./jade/nav.jade
-		.hero
-			h2 Love is in the Air
-			p Lipsum Dolor Sit Amet
+		.container
+			.hero
+				h2 Love is in the Air
+				p Lipsum Dolor Sit Amet
 
 		.container
-			.col-sm-12
+			.col-sm-12.subhero
 				h2=heading
+				p Luxury priting with your personal touch. Letterpress, Engraving &amp; Foil printed papers. Choose from our options below or head to our site for more.
 
 			.row
 				.col-sm-7
 					h3 Hand Bordered Square
 					p Lipsum Dolor Sit Amet
-					button Customize
+					button 
+						span.text Customize
 				.col-sm-5
 					img(src='http://placekitten.com/g/300/300')
 			.row
@@ -27,14 +30,15 @@ html
 				.col-sm-7
 					h3 Colby Wedding Invitation
 					p Lipsum Dolor Sit Amet
-					button Customize
+					button 
+						span.text Customize
 
 			br
 			br
 			hr
 
 			.row
-				.col-sm-12.heading
+				.col-sm-12.subhero
 					h2 Coture Wedding Invitations
 					p Some weddings call for an introduction a bit more luxurious. For those kinds of weddings, we offer Couture wedding invitations that introduce your wedding with only the highest form of taste and social grace.
 
@@ -42,7 +46,8 @@ html
 				.col-sm-7
 					h3 Freeman + Carlisle
 					p Lipsum Dolor Sit Amet
-					button View Invitation
+					button 
+						span.text View Invitation
 				.col-sm-5
 					img(src='http://placekitten.com/g/300/300')
 
@@ -52,10 +57,7 @@ html
 				.col-sm-7
 					h3 Callahan + Shaw
 					p Lipsum Dolor Sit Amet
-					button View Invitation
-
-			.hero
-				h2 Our Mission Is to create the proper introduction for your memeorable affair
-				button Get Started Today
+					button 
+						span.text View Invitation
 
 		include ./jade/footer.jade

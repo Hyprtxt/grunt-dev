@@ -8,7 +8,10 @@ head
 
 if env === 'dev'
 	each style in stylesheets
-		link(rel='stylesheet', href='../' + style)
+		if style[0] === '/' && style[1] === '/'
+			link(rel='stylesheet', href=style)
+		else
+			link(rel='stylesheet', href='../' + style)
 else
 	link(rel='stylesheet', href='css/bundle.css')
 

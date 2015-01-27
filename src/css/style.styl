@@ -1,106 +1,28 @@
 @import 'nib'
 
-// .ct-label.ct-horizontal
-// 	transform rotate( 90deg )
-
 body
 	background white
 	color #030303
-	font-family serif
-
-h1
-	text-align center
+	font-family Cinzel
 
 p
 	font-family sans-serif
+	font-size 18px
+	font-weight 300
 
-.shadow
-	border-radius 4px
-	margin 0 auto
-	box-shadow 1px 1px 3px #333
-	padding 10px 30px
-	background white
+@import 'header'
 
 .container
 	margin-top 30px
 	margin-bottom 90px
 
-.heading h2,
-.heading p
+.subhero
 	text-align center
-
-.footer
-	background #646263
-	padding 20px 30px
-	ul
-		width 800px
-		list-style none
-		margin 0 auto
-		padding-bottom 30px
-	li
-		float left
-		border-right 1px solid white
-		line-height 12px
-	li:last-of-type
-		border none
-	a
-		padding 0 15px
+	padding-bottom 80px
+	h2
+		text-transform uppercase
 	p
-		clear both
-		text-align center
-	a, p
-		color white
-		font-family sans-serif
-		text-transform uppercase
-		font-size 11px
-
-button
-	background: red
-	background:
-		linear-gradient(135deg, transparent 10px, #c00 0) top left,
-		linear-gradient(225deg, transparent 10px, #c00 0) top right,
-		linear-gradient(315deg, transparent 10px, #c00 0) bottom right,
-		linear-gradient(45deg,  transparent 10px, #c00 0) bottom left;
-	background-size: 50% 50%;
-	background-repeat: no-repeat;
-	background-image:
-		radial-gradient(circle at 0 0, rgba(204,0,0,0) 6px, #c00 7px),
-		radial-gradient(circle at 100% 0, rgba(204,0,0,0) 6px, #c00 7px),
-		radial-gradient(circle at 100% 100%, rgba(204,0,0,0) 6px, #c00 7px),
-		radial-gradient(circle at 0 100%, rgba(204,0,0,0) 6px, #c00 7px);
-	border: 1px solid blue
-	border: none
-	padding: 10px 20px
-	color: white
-	font-family: sans-serif
-	// text-transform: uppercase
-	// background-size: 50% 50%
-	// background-repeat: no-repeat
-	// background-image:
-	// 	radial-gradient(circle at 0 0, rgba(204,0,0,0) 14px, #c00 15px),
-	// 	radial-gradient(circle at 100% 0, rgba(204,0,0,0) 14px, #c00 15px),
-	// 	radial-gradient(circle at 100% 100%, rgba(204,0,0,0) 14px, #c00 15px),
-	// 	radial-gradient(circle at 0 100%, rgba(204,0,0,0) 14px, #c00 15px);
-
-.header
-	i
-		color #ccc
-		font-size 24px
-	ul
-		width 800px
-		list-style none
+		width 700px
 		margin 0 auto
-		padding-bottom 30px
-	li
-		float left
-		border-right 1px solid #030303
-		line-height 12px
-	li:last-of-type
-		border none
-	a
-		padding 0 15px
-	a, p
-		color: #030303
-		font-family sans-serif
-		text-transform uppercase
-		font-size 11px
+
+@import 'footer'
