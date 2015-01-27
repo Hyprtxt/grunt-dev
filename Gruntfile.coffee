@@ -20,6 +20,12 @@ module.exports = ( grunt ) ->
 				files:
 					'dest/css/bundle.css': config.stylesheets
 
+		# Alternate to cssmin 
+		concat:
+			production:
+				files:
+					'dest/css/bundle.css': config.stylesheets
+
 		copy:
 			src_files:
 				expand: true
@@ -135,6 +141,7 @@ module.exports = ( grunt ) ->
 
 	grunt.loadNpmTasks('grunt-contrib-uglify')
 	grunt.loadNpmTasks('grunt-contrib-cssmin')
+	grunt.loadNpmTasks('grunt-contrib-concat')
 
 	grunt.loadNpmTasks('grunt-contrib-jshint')
 	grunt.loadNpmTasks('grunt-build-docs')
@@ -162,7 +169,8 @@ module.exports = ( grunt ) ->
 			'build'
 			'jade:production'
 			'copy:production'
-			'cssmin:production'
+			# 'cssmin:production'
+			'concat:production'
 			'uglify:production'
 			'build'
 		]
