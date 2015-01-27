@@ -51,3 +51,9 @@ There is a data.json file in the root dir that handles site wide template data.
 * `grunt build` clean, jade then stylus
 * `grunt export` builds, concatonates and minifies to `dest/`
 
+### Edge Cases
+
+Fontawesome - You'll need to copy the /fonts directory into `src_files` to make it work in production
+
+Google Fonts - I really wish Bower and Google Fonts would play nice together, but they just don't. 
+

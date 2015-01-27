@@ -11,7 +11,10 @@ module.exports = {
 		, 'bower_components/fontawesome/css/font-awesome.css'
 		, 'dev/css/style.css'
 	]
-	, fonts: [
-		'//fonts.googleapis.com/css?family=Cinzel:400,700'
-	]
+	, bypass: {
+		stylesheets: [
+			'//fonts.googleapis.com/css?family=Cinzel:400,700'
+		]
+		, javascripts: []
+	}
 };
