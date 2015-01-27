@@ -53,7 +53,6 @@ There is a data.json file in the root dir that handles site wide template data.
 
 ### Edge Cases
 
-Fontawesome - You'll need to copy the /fonts directory into `src_files` to make it work in production
+Fontawesome - You'll need to copy the /fonts directory into `src_files` to make it work in production, any bower component that does an relative internal 'require', 'url' or 'import' call will run into this sort of thing.
 
-Google Fonts - I really wish Bower and Google Fonts would play nice together, but they just don't. 
-
+Google Fonts - I really wish Bower and Google Fonts would play nice together, but they just don't. For now just use the `bypass` configuration section to include the stylesheet directly from the CDN. (even in production)
