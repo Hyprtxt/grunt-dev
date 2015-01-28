@@ -1,5 +1,5 @@
 {
-  "name": "grunt",
+  "name": "hyprtxt",
   "version": "0.0.0",
   "homepage": "https://github.com/Hyprtxt/grunt-dev",
   "authors": [
@@ -16,6 +16,7 @@
     "tests"
   ],
   "dependencies": {
-    "jquery": "~2.1.1"
+    "jquery": "~2.1.1",
+    "bootstrap": "~3.3.2"
   }
 }

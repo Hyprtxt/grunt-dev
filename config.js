@@ -6,7 +6,8 @@ module.exports = {
 		, 'dev/js/script.js'
 	]
 	, stylesheets: [
-		'dev/css/style.css'
+		'bower_components/bootstrap/dist/css/bootstrap.css'
+		, 'dev/css/style.css'
 	]
 	, bypass: {
 		stylesheets: []
