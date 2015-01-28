@@ -1,1 +1,1 @@
-console.log( 'we have scripting' );
+new WOW().init();
