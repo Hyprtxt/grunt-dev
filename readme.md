@@ -1,10 +1,14 @@
-# Reap Report Maker Application
+# Developer Environment
+
 
 ## Static Website Builder
 
+* Grunt
 * Jade
 * Stylus/Nib
+* Bower
 * Live Reload
+
 
 ### Installing Client Side Deps with BOWER
 
@@ -37,9 +41,11 @@ You should serve up the whole `reportmaker` directory on your webserver. This me
 * Install Client Side Dependancies `bower install`
 * Run Grunt `grunt` or `grunt watch`
 
+
 ### Jade Templating
 
-There is a data.json file in the root dir that handles site wide template data.
+There is a data.json file in the root dir that handles site wide template data. Define variables in that file to use them in your templates.
+
 
 ### Commands
 
@@ -50,6 +56,7 @@ There is a data.json file in the root dir that handles site wide template data.
 * `grunt clean` clean up the out & dest directories
 * `grunt build` clean, jade then stylus
 * `grunt export` builds, concatonates and minifies to `dest/`
+
 
 ### Edge Cases
 

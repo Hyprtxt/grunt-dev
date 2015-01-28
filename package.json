@@ -1,7 +1,7 @@
 {
-  "name": "reportmaker",
-  "version": "0.5.0",
-  "description": "Report Making Application for Reap Marketing",
+  "name": "hyprtxt",
+  "version": "1.0.0",
+  "description": "A Developer Environment",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
