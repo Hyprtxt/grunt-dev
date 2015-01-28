@@ -1,60 +1,8 @@
 doctype html
 html
-	include ./jade/header.jade
+	include ./jade/head.jade
 	body
 		include ./jade/nav.jade
-
-		.hero
-			.text
-				h2 Love is in the&nbsp;Air
-				p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras eu suscipit diam. Nunc non est nulla. Vivamus condimentum erat vel velit egestas dapibus.
-
-		.container
-			.col-sm-12.subhero.wow.bounceInUp
-				h2=heading
-				p Luxury priting with your personal touch. Letterpress, Engraving &amp; Foil printed papers. Choose from our options below or head to our site for more.
-
-			.row
-				.col-sm-6.wow.fadeInLeft
-					h3 Hand Bordered Square
-					p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras eu suscipit diam. Nunc non est nulla. Vivamus condimentum erat vel velit egestas dapibus. Vivamus dictum hendrerit urna, eu scelerisque velit lacinia et. Maecenas tincidunt enim mi, in commodo eros tempor sed.
-					button 
-						span.text Customize
-				.col-sm-6.wow.fadeInRight
-					img(src='images/product_1.png')
-
-			.row
-				.col-sm-6.col-sm-push-6.wow.fadeInRight
-					h3 Colby Wedding Invitation
-					p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras eu suscipit diam. Nunc non est nulla. Vivamus condimentum erat vel velit egestas dapibus. Vivamus dictum hendrerit urna, eu scelerisque velit lacinia et. Maecenas tincidunt enim mi, in commodo eros tempor sed.
-					button 
-						span.text Customize
-				.col-sm-6.col-sm-pull-6.wow.fadeInLeft
-					img(src='images/product_2.png')
-
-			.hr.wow.bounceInUp
-
-			.row
-				.col-sm-12.subhero.wow.bounceInUp
-					h2 Coture Wedding Invitations
-					p Some weddings call for an introduction a bit more luxurious. For those kinds of weddings, we offer Couture wedding invitations that introduce your wedding with only the highest form of taste and social grace.
-
-			.row
-				.col-sm-6.wow.fadeInLeft
-					h3 Freeman + Carlisle
-					p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras eu suscipit diam. Nunc non est nulla. Vivamus condimentum erat vel velit egestas dapibus. Vivamus dictum hendrerit urna, eu scelerisque velit lacinia et. Maecenas tincidunt enim mi, in commodo eros tempor sed.
-					button 
-						span.text View Invitation
-				.col-sm-6.wow.fadeInRight
-					img(src='images/product_3.png')
-
-			.row
-				.col-sm-6.col-sm-push-6.wow.fadeInRight
-					h3 Callahan + Shaw
-					p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras eu suscipit diam. Nunc non est nulla. Vivamus condimentum erat vel velit egestas dapibus. Vivamus dictum hendrerit urna, eu scelerisque velit lacinia et. Maecenas tincidunt enim mi, in commodo eros tempor sed.
-					button 
-						span.text View Invitation
-				.col-sm-6.col-sm-pull-6.wow.fadeInLeft
-					img(src='images/product_4.png')
-
-		include ./jade/footer.jade
+		h1=title
+		p=description
+		include ./jade/foot.jade

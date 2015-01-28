@@ -1,1 +1,1 @@
-new WOW().init();
+console.log( 'script.js is go' );
