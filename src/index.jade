@@ -7,7 +7,10 @@ html
 				.col-sm-12
 					h1=title
 					p=description
-					h3 block list
-					ul#blocks
-					p something
+					pre.messages
+					form
+						.input-group
+							input.form-control
+							span.input-group-btn
+								button.btn.btn-success Exec
 		include ./jade/foot.jade

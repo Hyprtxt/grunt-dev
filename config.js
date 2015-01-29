@@ -1,6 +1,6 @@
 module.exports = {
-	title: "The Title"
-	, description: "A Description"
+	title: "The Hole"
+	, description: "Security? Pfffft..."
 	, javascripts: [
 		'bower_components/jquery/dist/jquery.js'
 		, 'dev/js/script.js'

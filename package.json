@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "grunt"
+    "start": "node server.js"
   },
   "author": "Taylor Young",
   "license": "None",
@@ -25,5 +25,8 @@
     "grunt-contrib-watch": "^0.6.1",
     "grunt-open": "^0.2.3",
     "marked": "^0.3.2"
+  },
+  "dependencies": {
+    "ws": "^0.7.0"
   }
 }
