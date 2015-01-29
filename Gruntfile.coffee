@@ -40,7 +40,7 @@ module.exports = ( grunt ) ->
 			js:
 				expand: true
 				cwd: 'src/js/'
-				src: '**'
+				src: '*.js'
 				dest: 'dev/js/'
 			production:
 				expand: true
@@ -86,6 +86,14 @@ module.exports = ( grunt ) ->
 						ext: '.html'
 					]
 
+		coffee:
+			dev:
+				expand: true
+				cwd: 'src/js/'
+				src: '*.coffee'
+				dest: 'dev/js/'
+				ext: '.js'
+
 		watch:
 			files:
 				files: ['src_files/**']
@@ -99,7 +107,12 @@ module.exports = ( grunt ) ->
 					livereload: true
 			js:
 				files: ['src/js/*.js']
-				tasks: ['jshint', 'copy']
+				tasks: ['copy', 'jshint']
+				options:
+					livereload: true
+			coffee:
+				files: ['src/js/*.coffee']
+				tasks: ['coffee', 'jshint']
 				options:
 					livereload: true
 			jade:
@@ -118,7 +131,7 @@ module.exports = ( grunt ) ->
 			dest: ['dest']
 
 		jshint:
-			all: ['src/js/*.js']
+			all: ['dev/js/*.js']
 
 		open:
 			dev: 
@@ -159,6 +172,7 @@ module.exports = ( grunt ) ->
 			'clean:dev'
 			'stylus'
 			'jade:dev'
+			'coffee:dev'
 			'copy:js'
 			'copy:src_files'
 		]
